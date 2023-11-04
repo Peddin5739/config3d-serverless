@@ -1,0 +1,49 @@
+.container {
+  display: flex;
+  min-height: 100vh; /* Ensures at least full height of the viewport */
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  flex-wrap: wrap; /* Allows components to wrap to the next line if not enough space */
+}
+
+.component {
+  flex: 1; /* Each component takes up 50% of the width */
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 10px;
+  overflow-y: auto; /* Adds a scrollbar if content overflows */
+  max-height: 80vh; /* Optional: sets a maximum height */
+  background-color: #fff; /* White background */
+}
+
+.Submit-button {
+  background-color: #4caf50; /* Green color */
+  color: white; /* White text */
+  padding: 10px 20px; /* Top and Bottom padding 10px, Right and Left padding 20px */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Cursor changes to pointer when hovered over */
+  font-size: 16px; /* Increased font size */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for background color and transform */
+}
+
+.Submit-button:hover {
+  background-color: #45a049; /* Darker green when hovered over */
+  transform: translateY(-2px); /* Slightly raise the button when hovered over */
+}
+
+.Submit-button:active {
+  transform: translateY(1px); /* Push the button down when clicked */
+}
+
+/* Additional styling for visual appeal */
+.component.left {
+  background-color: #f0f0f0; /* Light grey for contrast */
+}
+
+.component.right {
+  background-color: #fafafa; /* Very light grey for contrast */
+}

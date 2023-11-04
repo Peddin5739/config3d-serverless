@@ -1,0 +1,12 @@
+.box {
+  border: 1px solid black;
+  display: inline-block;
+  padding: 10px; /* Optional, to give some space between the content and the border */
+}
+
+.color-button {
+  width: "30px";
+  border: "none";
+  border-radius: "50%";
+  cursor: "pointer";
+}
