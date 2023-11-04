@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from "react";
 import "./customize.css";
 import Colors from "./sharingcolors";
 
+function caliculateTime() {}
+
 // seting the color for the buttons and capturing the color user clicked
 function ColorPicker({ meshName }) {
   const { setColor, setMesh } = useContext(Colors);
@@ -36,13 +38,33 @@ function ColorPicker({ meshName }) {
           onClick={() => {
             setColor(color.hex);
             setMesh(meshName);
-            fetch("/colors", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ color: color.hex, mesh: meshName }),
-            });
+            fetch(
+              "https://ipff2cyrve.execute-api.us-east-2.amazonaws.com/record-colors-time",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ color: color.hex, mesh: meshName }),
+              }
+            )
+              .then((response) => {
+                if (response.ok) {
+                  return response.json(); // or response.text() if the response is not in JSON format
+                }
+                throw new Error(
+                  "Network response was not ok: " + response.statusText
+                );
+              })
+              .then((data) => {
+                console.log("Success:", data); // Process the data or call another function with the data
+              })
+              .catch((error) => {
+                console.error(
+                  "There has been a problem with your fetch operation:",
+                  error
+                );
+              });
           }}
         ></button>
       ))}

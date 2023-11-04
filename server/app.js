@@ -38,7 +38,7 @@ app.post("/record-colors-time", (req, res) => {
   const cdata = req.body;
   //process the dta
   const processedData = {
-    message: "data received sucesss fully ",
+    message: "data received sucesss fully from LAMBDA NAVEEN",
     input: cdata,
   };
   res.status(200).json(processedData);
