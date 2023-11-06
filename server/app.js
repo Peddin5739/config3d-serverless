@@ -34,14 +34,27 @@ app.get("/data", (req, res) => {
 });
 
 app.post("/record-colors-time", (req, res) => {
-  // access the client data
-  const cdata = req.body;
-  //process the dta
-  const processedData = {
-    message: "data received sucesss fully from LAMBDA NAVEEN",
-    input: cdata,
-  };
-  res.status(200).json(processedData);
+  const { meshname, color, time } = req.body;
+
+  // Assuming 'time' is the duration in milliseconds and should be stored as bigint.
+  const timeBigInt = BigInt(time);
+
+  // Ensure your SQL parameters are correctly passed. This depends on how your SQL library handles parameters.
+  // Below is a generic example which will differ based on the SQL library you are using (like pg, mysql, etc.).
+  const query = `
+    INSERT INTO UserProductPartColorTime (user_id, part_name, color_name, time_spent)
+    VALUES (?, ?, ?, ?);
+  `;
+
+  const values = [7028, meshname, color, timeBigInt];
+
+  pool.query(query, values, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({ message: "Data inserted successfully", data: results });
+  });
 });
 
 module.exports.handler = serverless(app);

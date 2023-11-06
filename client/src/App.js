@@ -1,15 +1,15 @@
 import "./App.css";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import Colors from "./sharingcolors.jsx";
 import ShoeModel from "./ShoeModel";
 import Customize from "./customize";
-
+import { Timer } from "./Callserver.jsx";
 function App() {
   const [color, setColor] = useState("black");
   const [mesh, setMesh] = useState("shoe_1");
-
+  Timer({ color, mesh });
   return (
     <Colors.Provider value={{ color, setColor, mesh, setMesh }}>
       <div className="container">

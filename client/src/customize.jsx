@@ -2,8 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import "./customize.css";
 import Colors from "./sharingcolors";
 
-function caliculateTime() {}
-
+const HandelTime = () => {
+  const { timespent, setTimespent } = useContext(Colors);
+};
 // seting the color for the buttons and capturing the color user clicked
 function ColorPicker({ meshName }) {
   const { setColor, setMesh } = useContext(Colors);
@@ -15,10 +16,6 @@ function ColorPicker({ meshName }) {
     { name: "Sunset Orange", hex: "#F4A261" },
     { name: "Burnt Sienna", hex: "#E76F51" },
   ];
-
-  useEffect(() => {
-    //set the
-  });
 
   return (
     <div style={{ display: "flex", gap: "10px" }}>
@@ -38,33 +35,6 @@ function ColorPicker({ meshName }) {
           onClick={() => {
             setColor(color.hex);
             setMesh(meshName);
-            fetch(
-              "https://ipff2cyrve.execute-api.us-east-2.amazonaws.com/record-colors-time",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ color: color.hex, mesh: meshName }),
-              }
-            )
-              .then((response) => {
-                if (response.ok) {
-                  return response.json(); // or response.text() if the response is not in JSON format
-                }
-                throw new Error(
-                  "Network response was not ok: " + response.statusText
-                );
-              })
-              .then((data) => {
-                console.log("Success:", data); // Process the data or call another function with the data
-              })
-              .catch((error) => {
-                console.error(
-                  "There has been a problem with your fetch operation:",
-                  error
-                );
-              });
           }}
         ></button>
       ))}
@@ -89,6 +59,9 @@ export default function Customize() {
       <ul>
         {meshes.map((mesh, index) => {
           let keyMesh = Object.keys(mesh);
+          if (keyMesh[0] === "shoe_") {
+            console.log("shoe_1");
+          }
           return (
             <li key={index}>
               {mesh[keyMesh]}
